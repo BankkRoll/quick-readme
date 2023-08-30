@@ -24,6 +24,7 @@
 - [Directory Tree](#-directory-tree)
 - [Contributing](#-contributing)
 - [License](#-license)
+- [Author](#-author)
 
 ---
 
@@ -73,7 +74,7 @@ For Local Installation
 npx quick-readme
 ```
 
-### 🛠️ Scripts
+## 🛠️ Scripts
 
 Here are some common scripts you can run:
 
@@ -165,6 +166,7 @@ yarn prepublishOnly
         +-- tree.d.ts
         +-- tree.js
         +-- tree.js.map
++-- LICENSE.txt
 +-- package-lock.json
 +-- package.json
 +-- src/
@@ -195,6 +197,13 @@ yarn prepublishOnly
 ## 📝 License
 
 This project is licensed under [MIT](./LICENSE).
+
+## 👤 Author
+
+**[BankkRoll](https://github.com/BankkRoll)**
+
+- Twitter: [@bankkroll_eth](https://twitter.com/bankkroll_eth)
+- GitHub: [@BankkRoll](https://github.com/BankkRoll)
 
 ---
 

@@ -111,7 +111,7 @@ export async function generateReadme(answers: any, packageInfo: any) {
 
   if (packageInfo?.scripts) {
     const scriptsMarkdown = formatScripts(packageInfo.scripts);
-    markdown += `### 🛠️ Scripts\n\n${scriptsMarkdown}\n\n`;
+    markdown += `## 🛠️ Scripts\n\n${scriptsMarkdown}\n\n`;
     addToTOC('Scripts', '-scripts');
   }
 
@@ -127,6 +127,9 @@ export async function generateReadme(answers: any, packageInfo: any) {
 
   addToTOC('License', '-license');
   markdown += `## 📝 License\n\nThis project is licensed under [${answers.licenseType}](./LICENSE).\n\n`;
+
+  addToTOC('Author', '-author');
+  markdown += `## 👤 Author\n\n**[${answers.authorName}](https://github.com/${answers.authorGithub})**\n\n- Twitter: [@${answers.authorTwitter}](https://twitter.com/${answers.authorTwitter})\n- GitHub: [@${answers.authorGithub}](https://github.com/${answers.authorGithub})\n\n`;
 
   const toc = `## 🗂️ Table of Contents\n\n${tocEntries.join('\n')}\n\n---\n\n`;
 

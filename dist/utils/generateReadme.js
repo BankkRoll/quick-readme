@@ -103,7 +103,7 @@ async function generateReadme(answers, packageInfo) {
     const scriptsMarkdown = (0, formatScripts_1.formatScripts)(
       packageInfo.scripts
     );
-    markdown += `### 🛠️ Scripts\n\n${scriptsMarkdown}\n\n`;
+    markdown += `## 🛠️ Scripts\n\n${scriptsMarkdown}\n\n`;
     addToTOC('Scripts', '-scripts');
   }
   markdown += `---\n\n`;
@@ -115,6 +115,8 @@ async function generateReadme(answers, packageInfo) {
   markdown += `## 🤝 Contributing\n\n1. Fork the Project\n2. Create your Feature Branch\n3. Commit your Changes\n4. Push to the Branch\n5. Open a Pull Request\n6. Code review\n7. Merge the changes\n8. Update the documentation\n\n---\n\n`;
   addToTOC('License', '-license');
   markdown += `## 📝 License\n\nThis project is licensed under [${answers.licenseType}](./LICENSE).\n\n`;
+  addToTOC('Author', '-author');
+  markdown += `## 👤 Author\n\n**[${answers.authorName}](https://github.com/${answers.authorGithub})**\n\n- Twitter: [@${answers.authorTwitter}](https://twitter.com/${answers.authorTwitter})\n- GitHub: [@${answers.authorGithub}](https://github.com/${answers.authorGithub})\n\n`;
   const toc = `## 🗂️ Table of Contents\n\n${tocEntries.join('\n')}\n\n---\n\n`;
   markdown = markdown.replace('<!--TOC-->', toc);
   // Add styled footer
