@@ -1,6 +1,6 @@
 {
   "name": "quick-readme",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "A CLI tool to generate README files",
   "main": "dist/index.js",
   "scripts": {

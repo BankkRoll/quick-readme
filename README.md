@@ -165,7 +165,6 @@ yarn prepublishOnly
         +-- tree.d.ts
         +-- tree.js
         +-- tree.js.map
-+-- notreadme.md
 +-- package-lock.json
 +-- package.json
 +-- src/
