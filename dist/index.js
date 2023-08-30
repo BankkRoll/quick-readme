@@ -15,6 +15,7 @@ const rl = readline_1.default.createInterface({
   terminal: true,
 });
 const prompt = async (question, color = '\x1b[34m') => {
+  // Default color is blue
   return new Promise(resolve => {
     rl.question(color + question + '\x1b[0m', answer => {
       resolve(answer);

@@ -3,13 +3,13 @@
 <img src="https://github.com/BankkRoll/quick-readme/assets/106103625/332aaeb9-0df8-439c-bd72-a1777b0e2019" />
 <br>quick-readme
 </h1>
-<h3>◦ A CLI tool to generate README files</h3>
+<h3>◦ A CLI tool to generate README files super fast and easily!</h3>
 </div>
 
 ---
 
 <div align="center">
-<img src="https://img.shields.io/npm/v/quick-readme.svg?style=flat-square" alt="npm version"> <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"> <img src="https://img.shields.io/github/stars/BankkRoll/quick-readme.svg?style=social" alt="GitHub Stars"> <img src="https://img.shields.io/github/last-commit/BankkRoll/quick-readme.svg?style=flat-square" alt="GitHub Last Commit"> <img src="https://img.shields.io/github/repo-size/BankkRoll/quick-readme.svg?style=flat-square" alt="GitHub Repo Size"> <img src="https://img.shields.io/badge/language-JavaScript-blueviolet.svg?style=flat-square" alt="JavaScript"> <img src="https://img.shields.io/badge/language-TypeScript-blueviolet.svg?style=flat-square" alt="TypeScript"> </div>
+<img src="https://img.shields.io/npm/v/quick-readme.svg?style" alt="npm version" /> <img src="https://img.shields.io/badge/license-MIT-blue.svg?style" alt="License" /> <img src="https://img.shields.io/badge/JavaScript-JavaScript-F7DF1E?style&logo=JavaScript&logoColor=F7DF1E" alt="JavaScript" /> <img src="https://img.shields.io/badge/TypeScript-TypeScript-3178C6?style&logo=TypeScript&logoColor=3178C6" alt="TypeScript" /> <img src="https://img.shields.io/github/stars/BankkRoll/quick-readme.svg?style=social" alt="GitHub Stars" /> <img src="https://img.shields.io/github/last-commit/BankkRoll/quick-readme.svg?style" alt="GitHub Last Commit" /> <img src="https://img.shields.io/github/repo-size/BankkRoll/quick-readme.svg?style" alt="GitHub Repo Size" /> </div>
 
 </div>
 
@@ -146,7 +146,7 @@ yarn prepublishOnly
 
 ## 🌳 Directory Tree
 
-```text
+```graphql
 +-- .npmignore
 +-- .prettierrc
 +-- dist/
@@ -207,4 +207,4 @@ This project is licensed under [MIT](./LICENSE).
 
 ---
 
-<p align="center"><i><font color="grey">This README.md has been generated with ❤️ from <a href="https://github.com/BankkRoll/quick-readme">quick-readme</a></font></i></p>
+<p align="center"><i><font color="grey">This README.md has been generated with ❤️ using <a href="https://github.com/BankkRoll/quick-readme">quick-readme</a></font></i></p>

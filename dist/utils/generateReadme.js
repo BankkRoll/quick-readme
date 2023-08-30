@@ -16,6 +16,20 @@ async function generateReadme(answers, packageInfo) {
   const { languages, frameworks } = (0, guessMainLanguage_1.guessMainLanguage)(
     packageInfo
   );
+  const languageColors = {
+    JavaScript: 'F7DF1E',
+    TypeScript: '3178C6',
+    'Node.js': '539E43',
+    React: '61DAFB',
+    Angular: 'DD0031',
+    'Vue.js': '4FC08D',
+    jQuery: '0769AD',
+    Webpack: '8DD6F9',
+    Babel: 'F9DC3E',
+    Jest: 'C21325',
+    Mocha: '8D6748',
+    npm: 'CB3837',
+  };
   const addToTOC = (title, symbol) => {
     tocEntries.push(`- [${title}](#${symbol})`);
   };
@@ -38,49 +52,58 @@ async function generateReadme(answers, packageInfo) {
   ) {
     markdown += `<div align="center">\n`;
     const repoName = answers.repo ? answers.repo.split('github.com/')[1] : '';
-    const addBadge = badge => {
-      markdown += `${badge} `;
+    const addBadge = (src, alt, logo, logoColor) => {
+      const logoPart = logo ? `&logo=${logo}` : '';
+      const logoColorPart = logoColor ? `&logoColor=${logoColor}` : '';
+      markdown += `<img src="${src}${logoPart}${logoColorPart}" alt="${alt}" /> `;
     };
     if (answers.buildTool === 'Travis') {
-      addBadge(
-        `<img src="https://img.shields.io/travis/${repoName}.svg?style=flat-square" alt="Travis">`
-      );
+      addBadge(`https://img.shields.io/travis/${repoName}.svg?style`, 'Travis');
     }
     if (answers.npmPackage) {
       addBadge(
-        `<img src="https://img.shields.io/npm/v/${answers.npmPackage}.svg?style=flat-square" alt="npm version">`
+        `https://img.shields.io/npm/v/${answers.npmPackage}.svg?style`,
+        'npm version'
       );
     }
     if (answers.licenseType) {
       addBadge(
-        `<img src="https://img.shields.io/badge/license-${answers.licenseType}-blue.svg?style=flat-square" alt="License">`
+        `https://img.shields.io/badge/license-${answers.licenseType}-blue.svg?style`,
+        'License'
       );
     }
-    if (Array.isArray(answers.language)) {
-      answers.language.forEach(lang => {
-        addBadge(
-          `<img src="https://img.shields.io/badge/language-${lang}-blueviolet.svg?style=flat-square" alt="${lang}">`
-        );
-      });
-    }
+    // Loop over languages
+    languages.forEach(lang => {
+      const color = languageColors[lang] || 'defaultColor';
+      addBadge(
+        `https://img.shields.io/badge/${lang}-${lang}-${color}?style&logo=${lang}&logoColor=${color}`,
+        lang
+      );
+    });
+    // Loop over frameworks
+    frameworks.forEach(fw => {
+      addBadge(
+        `https://img.shields.io/badge/framework-${fw}-green.svg?style`,
+        fw,
+        fw
+      );
+    });
     if (answers.repo) {
       addBadge(
-        `<img src="https://img.shields.io/github/stars/${repoName}.svg?style=social" alt="GitHub Stars">`
+        `https://img.shields.io/github/stars/${repoName}.svg?style=social`,
+        'GitHub Stars'
       );
       addBadge(
-        `<img src="https://img.shields.io/github/last-commit/${repoName}.svg?style=flat-square" alt="GitHub Last Commit">`
+        `https://img.shields.io/github/last-commit/${repoName}.svg?style`,
+        'GitHub Last Commit'
       );
       addBadge(
-        `<img src="https://img.shields.io/github/repo-size/${repoName}.svg?style=flat-square" alt="GitHub Repo Size">`
+        `https://img.shields.io/github/repo-size/${repoName}.svg?style`,
+        'GitHub Repo Size'
       );
     }
-    languages.forEach(lang => {
-      markdown += `<img src="https://img.shields.io/badge/language-${lang}-blueviolet.svg?style=flat-square" alt="${lang}"> `;
-    });
-    frameworks.forEach(fw => {
-      markdown += `<img src="https://img.shields.io/badge/framework-${fw}-green.svg?style=flat-square" alt="${fw}"> `;
-    });
-    markdown += `</div>\n\n`;
+    // Close the paragraph
+    markdown += '</div>\n\n';
   }
   markdown += `</div>\n\n`;
   markdown += `---\n\n`;
@@ -108,9 +131,8 @@ async function generateReadme(answers, packageInfo) {
   }
   markdown += `---\n\n`;
   addToTOC('Directory Tree', '-directory-tree');
-  markdown += `## 🌳 Directory Tree\n\n\`\`\`text\n${(0, tree_1.generateTree)(
-    process.cwd()
-  )}\`\`\`\n\n---\n\n`;
+  markdown += `## 🌳 Directory Tree\n\n\`\`\`graphql\n${(0,
+  tree_1.generateTree)(process.cwd())}\`\`\`\n\n---\n\n`;
   addToTOC('Contributing', '-contributing');
   markdown += `## 🤝 Contributing\n\n1. Fork the Project\n2. Create your Feature Branch\n3. Commit your Changes\n4. Push to the Branch\n5. Open a Pull Request\n6. Code review\n7. Merge the changes\n8. Update the documentation\n\n---\n\n`;
   addToTOC('License', '-license');
@@ -120,7 +142,7 @@ async function generateReadme(answers, packageInfo) {
   const toc = `## 🗂️ Table of Contents\n\n${tocEntries.join('\n')}\n\n---\n\n`;
   markdown = markdown.replace('<!--TOC-->', toc);
   // Add styled footer
-  markdown += `\n---\n\n<p align="center"><i><font color="grey">This README.md has been generated with ❤️ from <a href="https://github.com/BankkRoll/quick-readme">quick-readme</a></font></i></p>\n`;
+  markdown += `\n---\n\n<p align="center"><i><font color="grey">This README.md has been generated with ❤️ using <a href="https://github.com/BankkRoll/quick-readme">quick-readme</a></font></i></p>\n`;
   // Write the README.md file
   fs_1.default.writeFileSync('README.md', markdown);
 }
