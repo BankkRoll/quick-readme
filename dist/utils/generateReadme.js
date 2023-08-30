@@ -117,6 +117,9 @@ async function generateReadme(answers, packageInfo) {
   markdown += `## 📝 License\n\nThis project is licensed under [${answers.licenseType}](./LICENSE).\n\n`;
   const toc = `## 🗂️ Table of Contents\n\n${tocEntries.join('\n')}\n\n---\n\n`;
   markdown = markdown.replace('<!--TOC-->', toc);
+  // Add styled footer
+  markdown += `\n---\n\n<p align="center"><i><font color="grey">This README.md has been generated with ❤️ from <a href="https://github.com/BankkRoll/quick-readme">quick-readme</a></font></i></p>\n`;
+  // Write the README.md file
   fs_1.default.writeFileSync('README.md', markdown);
 }
 exports.generateReadme = generateReadme;

@@ -132,5 +132,9 @@ export async function generateReadme(answers: any, packageInfo: any) {
 
   markdown = markdown.replace('<!--TOC-->', toc);
 
+  // Add styled footer
+  markdown += `\n---\n\n<p align="center"><i><font color="grey">This README.md has been generated with ❤️ from <a href="https://github.com/BankkRoll/quick-readme">quick-readme</a></font></i></p>\n`;
+
+  // Write the README.md file
   fs.writeFileSync('README.md', markdown);
 }

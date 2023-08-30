@@ -1,6 +1,7 @@
 <div align="center">
 <h1 align="center">
 <img src="https://github.com/BankkRoll/quick-readme/assets/106103625/332aaeb9-0df8-439c-bd72-a1777b0e2019" />
+<br>quick-readme
 </h1>
 <h3>◦ A CLI tool to generate README files</h3>
 </div>
@@ -164,6 +165,7 @@ yarn prepublishOnly
         +-- tree.d.ts
         +-- tree.js
         +-- tree.js.map
++-- notreadme.md
 +-- package-lock.json
 +-- package.json
 +-- src/
@@ -194,3 +196,7 @@ yarn prepublishOnly
 ## 📝 License
 
 This project is licensed under [MIT](./LICENSE).
+
+---
+
+<p align="center"><i><font color="grey">This README.md has been generated with ❤️ from <a href="https://github.com/BankkRoll/quick-readme">quick-readme</a></font></i></p>
