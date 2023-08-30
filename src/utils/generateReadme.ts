@@ -2,6 +2,8 @@ import fs from 'fs';
 import { guessMainLanguage } from './guessMainLanguage';
 import { formatScripts } from './formatScripts';
 import { generateTree } from './tree';
+import { analyzeCodebase } from './analyzeCodebase';
+import { generateLanguageUsage } from './languages';
 
 export async function generateReadme(answers: any, packageInfo: any) {
   let markdown = '';
@@ -150,6 +152,16 @@ export async function generateReadme(answers: any, packageInfo: any) {
   markdown += `## 🌳 Directory Tree\n\n\`\`\`graphql\n${generateTree(
     process.cwd()
   )}\`\`\`\n\n---\n\n`;
+
+  // Analyze the codebase to get language stats
+  const languageStats = analyzeCodebase(process.cwd()); // <-- Add this line
+
+  // Generate the visual representation of language usage
+  const languageUsage = generateLanguageUsage(languageStats); // <-- Add this line
+
+  // Add the Language Usage section to your markdown
+  addToTOC('Language Usage', '-language-usage'); // <-- Add this line
+  markdown += `## 💻 Language Usage\n\n\`\`\`\n${languageUsage}\n\`\`\`\n\n---\n\n`; // <-- Add this line
 
   addToTOC('Contributing', '-contributing');
   markdown += `## 🤝 Contributing\n\n1. Fork the Project\n2. Create your Feature Branch\n3. Commit your Changes\n4. Push to the Branch\n5. Open a Pull Request\n6. Code review\n7. Merge the changes\n8. Update the documentation\n\n---\n\n`;

@@ -22,6 +22,7 @@
 - [Usage](#-usage)
 - [Scripts](#-scripts)
 - [Directory Tree](#-directory-tree)
+- [Language Usage](#-language-usage)
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Author](#-author)
@@ -169,14 +170,26 @@ yarn prepublishOnly
 +-- LICENSE.txt
 +-- package-lock.json
 +-- package.json
++-- README.md
 +-- src/
     +-- index.ts
     +-- utils/
+        +-- analyzeCodebase.ts
         +-- formatScripts.ts
         +-- generateReadme.ts
         +-- guessMainLanguage.ts
+        +-- languages.ts
         +-- tree.ts
 +-- tsconfig.json
+```
+
+---
+
+## 💻 Language Usage
+
+```
+TypeScript: ██ 20.01%
+JavaScript: ████████ 79.99%
 ```
 
 ---

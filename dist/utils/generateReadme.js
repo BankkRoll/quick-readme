@@ -10,6 +10,8 @@ const fs_1 = __importDefault(require('fs'));
 const guessMainLanguage_1 = require('./guessMainLanguage');
 const formatScripts_1 = require('./formatScripts');
 const tree_1 = require('./tree');
+const analyzeCodebase_1 = require('./analyzeCodebase');
+const languages_1 = require('./languages');
 async function generateReadme(answers, packageInfo) {
   let markdown = '';
   let tocEntries = [];
@@ -133,6 +135,13 @@ async function generateReadme(answers, packageInfo) {
   addToTOC('Directory Tree', '-directory-tree');
   markdown += `## 🌳 Directory Tree\n\n\`\`\`graphql\n${(0,
   tree_1.generateTree)(process.cwd())}\`\`\`\n\n---\n\n`;
+  // Analyze the codebase to get language stats
+  const languageStats = (0, analyzeCodebase_1.analyzeCodebase)(process.cwd()); // <-- Add this line
+  // Generate the visual representation of language usage
+  const languageUsage = (0, languages_1.generateLanguageUsage)(languageStats); // <-- Add this line
+  // Add the Language Usage section to your markdown
+  addToTOC('Language Usage', '-language-usage'); // <-- Add this line
+  markdown += `## 💻 Language Usage\n\n\`\`\`\n${languageUsage}\n\`\`\`\n\n---\n\n`; // <-- Add this line
   addToTOC('Contributing', '-contributing');
   markdown += `## 🤝 Contributing\n\n1. Fork the Project\n2. Create your Feature Branch\n3. Commit your Changes\n4. Push to the Branch\n5. Open a Pull Request\n6. Code review\n7. Merge the changes\n8. Update the documentation\n\n---\n\n`;
   addToTOC('License', '-license');
