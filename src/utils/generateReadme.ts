@@ -14,7 +14,7 @@ export async function generateReadme(answers: any, packageInfo: any) {
 
   markdown += `<div align="center">\n<h1 align="center">\n`;
   if (answers.bannerUrl) {
-    markdown += `<img src="${answers.bannerUrl}" width="80" />\n`;
+    markdown += `<img src="${answers.bannerUrl}" />\n`;
   }
   markdown += `<br>${answers.title || 'Your Project Title'}\n</h1>\n`;
   markdown += `<h3>◦ ${

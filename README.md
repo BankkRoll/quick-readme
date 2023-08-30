@@ -1,7 +1,6 @@
 <div align="center">
 <h1 align="center">
-<img src="https://i.ibb.co/vD3yPmL/cooltext442097817434540.png" width="80" />
-<br>quick-readme
+<img src="https://github.com/BankkRoll/quick-readme/assets/106103625/332aaeb9-0df8-439c-bd72-a1777b0e2019" />
 </h1>
 <h3>◦ A CLI tool to generate README files</h3>
 </div>
@@ -29,11 +28,11 @@
 
 ## ⚙️ Features
 
-| Feature                | Description                        |
-| ---------------------- | ---------------------------------- |
-| **Easy**               | Description for Easy               |
-| **Quick**              | Description for Quick              |
-| **Good Documentation** | Description for Good Documentation |
+| Feature                    | Description                            |
+| -------------------------- | -------------------------------------- |
+| **Easy Readme Generation** | Description for Easy Readme Generation |
+| **Fast & Simple**          | Description for Fast & Simple          |
+| **Fully Advanced Results** | Description for Fully Advanced Results |
 
 ---
 
@@ -146,10 +145,27 @@ yarn prepublishOnly
 ## 🌳 Directory Tree
 
 ```text
++-- .npmignore
 +-- .prettierrc
++-- dist/
+    +-- index.d.ts
+    +-- index.js
+    +-- index.js.map
+    +-- utils/
+        +-- formatScripts.d.ts
+        +-- formatScripts.js
+        +-- formatScripts.js.map
+        +-- generateReadme.d.ts
+        +-- generateReadme.js
+        +-- generateReadme.js.map
+        +-- guessMainLanguage.d.ts
+        +-- guessMainLanguage.js
+        +-- guessMainLanguage.js.map
+        +-- tree.d.ts
+        +-- tree.js
+        +-- tree.js.map
 +-- package-lock.json
 +-- package.json
-+-- README.md
 +-- src/
     +-- index.ts
     +-- utils/
@@ -157,7 +173,6 @@ yarn prepublishOnly
         +-- generateReadme.ts
         +-- guessMainLanguage.ts
         +-- tree.ts
-+-- tester
 +-- tsconfig.json
 ```
 
