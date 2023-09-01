@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 'use strict';
 var __importDefault =
   (this && this.__importDefault) ||
@@ -132,18 +133,36 @@ const main = async () => {
     const shouldProceed = await prompt(
       'This will overwrite your existing README.md. Do you want to proceed? (yes/no): ',
       '\x1b[33m'
-    ); // Yellow for warning
+    );
+    if (!shouldProceed) {
+      throw new Error('Failed to get user confirmation.');
+    }
     if (shouldProceed.toLowerCase() !== 'yes') {
-      console.log('\x1b[33m', 'Operation aborted.', '\x1b[0m'); // Yellow for warning
+      console.log('\x1b[33m', 'Operation aborted.', '\x1b[0m');
       rl.close();
       return;
     }
-    console.log('\x1b[32m', 'Proceeding with README generation...', '\x1b[0m'); // Green for success
+    console.log('\x1b[32m', 'Proceeding with README generation...', '\x1b[0m');
     const packageInfo = await readPackageJson();
+    if (!packageInfo) {
+      throw new Error('Failed to read package.json or it does not exist.');
+    }
     const answers = await collectInfo(packageInfo);
-    await (0, generateReadme_1.generateReadme)(answers, packageInfo);
+    if (!answers) {
+      throw new Error('Failed to collect information for README generation.');
+    }
+    try {
+      await (0, generateReadme_1.generateReadme)(answers, packageInfo);
+    } catch (genError) {
+      throw new Error('Failed to generate README: ' + genError.message);
+    }
+    console.log('\x1b[32m', 'README generation successful.', '\x1b[0m');
   } catch (error) {
-    console.error('\x1b[31m', 'An error occurred:', error, '\x1b[0m'); // Red for error
+    if (error instanceof Error) {
+      console.error('\x1b[31m', 'An error occurred:', error.message, '\x1b[0m');
+    } else {
+      console.error('\x1b[31m', 'An unknown error occurred:', error, '\x1b[0m');
+    }
   } finally {
     rl.close();
   }
