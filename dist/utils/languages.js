@@ -2,7 +2,6 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.languageColors = exports.generateLanguageUsage = void 0;
 // Define the language colors mapping
-// Define the language colors mapping
 const languageColors = {
   JavaScript: 'F7DF1E',
   'JavaScript (React)': '61DAFB',
@@ -58,19 +57,19 @@ const generateLanguageUsage = languageStats => {
       otherTotal += languageStats[lang];
       continue;
     }
-    // Use bars or emojis to represent the percentage, you can choose your own representation
     const bars = '█'.repeat(Math.round(parseFloat(percentage) / 10));
     visualRepresentation += `${lang}: ${bars} ${percentage}%\n`;
   }
-  // Add the "Other" category if necessary and its value is greater than 0
   if (otherTotal > 0) {
     const otherPercentage = ((otherTotal / total) * 100).toFixed(2);
     if (parseFloat(otherPercentage) > 0) {
       const otherBars = '█'.repeat(
         Math.round(parseFloat(otherPercentage) / 10)
       );
-      visualRepresentation += `Other: ${otherBars} ${otherPercentage}%\n`;
+      visualRepresentation += `Other: ${otherBars} ${otherPercentage}%`;
     }
+  } else {
+    visualRepresentation = visualRepresentation.slice(0, -1);
   }
   return visualRepresentation;
 };

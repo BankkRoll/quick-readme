@@ -215,7 +215,6 @@ Markdown: ███ 27.96%
 JSON: ██ 20.00%
 TypeScript: █████ 50.56%
 Other:  1.48%
-
 ```
 
 ---
