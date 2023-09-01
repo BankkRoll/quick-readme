@@ -1,6 +1,6 @@
 {
   "name": "quick-readme",
-  "version": "1.0.21",
+  "version": "1.0.24",
   "description": "A CLI tool to generate README files super fast and easily!",
   "main": "dist/index.js",
   "scripts": {
@@ -10,11 +10,28 @@
     "add-shebang": "node add-shebang.js",
     "prepublishOnly": "npm run build && npm run format && npm run add-shebang"
   },
-  "keywords": [],
+  "keywords": [
+    "CLI",
+    "README",
+    "documentation",
+    "markdown",
+    "generator",
+    "quick",
+    "easy",
+    "fast"
+  ],
   "author": "BankkRoll",
   "license": "MIT",
   "bin": {
     "quick-readme": "./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BankkRoll/quick-readme.git"
+  },
+  "homepage": "https://github.com/BankkRoll/quick-readme#readme",
+  "bugs": {
+    "url": "https://github.com/BankkRoll/quick-readme/issues"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.3",

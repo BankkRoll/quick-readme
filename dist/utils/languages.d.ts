@@ -1,5 +1,42 @@
+declare const languageColors: {
+  JavaScript: string;
+  'JavaScript (React)': string;
+  TypeScript: string;
+  'TypeScript (React)': string;
+  JSON: string;
+  CoffeeScript: string;
+  Sass: string;
+  Less: string;
+  Stylus: string;
+  'Vue.js': string;
+  Elm: string;
+  ClojureScript: string;
+  Go: string;
+  'Go (GopherJS)': string;
+  Rust: string;
+  'Rust (WebAssembly)': string;
+  'JavaScript (ES Modules)': string;
+  'JavaScript (CommonJS)': string;
+  HTML: string;
+  CSS: string;
+  Markdown: string;
+  GraphQL: string;
+  Python: string;
+  Ruby: string;
+  Lua: string;
+  Java: string;
+  'C#': string;
+  Nodejs: string;
+  React: string;
+  Angular: string;
+  jQuery: string;
+  Webpack: string;
+  Babel: string;
+  Jest: string;
+  Mocha: string;
+  npm: string;
+};
 export declare const generateLanguageUsage: (
-  languageStats: Record<string, number>,
-  decimalPrecision?: number
+  languageStats: Record<string, number>
 ) => string;
-export declare const languageColors: (language: string) => string;
+export { languageColors };

@@ -127,6 +127,22 @@ Or with yarn:
 yarn format
 ```
 
+#### add-shebang
+
+Runs the custom script.
+
+You can run this script using npm or yarn:
+
+```shell
+npm run add-shebang
+```
+
+Or with yarn:
+
+```shell
+yarn add-shebang
+```
+
 #### prepublishOnly
 
 Runs the custom script.
@@ -148,39 +164,46 @@ yarn prepublishOnly
 ## 🌳 Directory Tree
 
 ```graphql
-+-- .npmignore
-+-- .prettierrc
-+-- dist/
-    +-- index.d.ts
-    +-- index.js
-    +-- index.js.map
-    +-- utils/
-        +-- formatScripts.d.ts
-        +-- formatScripts.js
-        +-- formatScripts.js.map
-        +-- generateReadme.d.ts
-        +-- generateReadme.js
-        +-- generateReadme.js.map
-        +-- guessMainLanguage.d.ts
-        +-- guessMainLanguage.js
-        +-- guessMainLanguage.js.map
-        +-- tree.d.ts
-        +-- tree.js
-        +-- tree.js.map
-+-- LICENSE.txt
-+-- package-lock.json
-+-- package.json
-+-- README.md
-+-- src/
-    +-- index.ts
-    +-- utils/
-        +-- analyzeCodebase.ts
-        +-- formatScripts.ts
-        +-- generateReadme.ts
-        +-- guessMainLanguage.ts
-        +-- languages.ts
-        +-- tree.ts
-+-- tsconfig.json
+├── 📄 .npmignore
+├── 📄 .prettierrc
+├── 📄 add-shebang.js
+├── 📦 dist/
+    ├── 📄 index.d.ts
+    ├── 📄 index.js
+    ├── 📄 index.js.map
+    └── 📂 utils/
+        ├── 📄 analyzeCodebase.d.ts
+        ├── 📄 analyzeCodebase.js
+        ├── 📄 analyzeCodebase.js.map
+        ├── 📄 formatScripts.d.ts
+        ├── 📄 formatScripts.js
+        ├── 📄 formatScripts.js.map
+        ├── 📄 generateReadme.d.ts
+        ├── 📄 generateReadme.js
+        ├── 📄 generateReadme.js.map
+        ├── 📄 guessMainLanguage.d.ts
+        ├── 📄 guessMainLanguage.js
+        ├── 📄 guessMainLanguage.js.map
+        ├── 📄 languages.d.ts
+        ├── 📄 languages.js
+        ├── 📄 languages.js.map
+        ├── 📄 tree.d.ts
+        ├── 📄 tree.js
+        └── 📄 tree.js.map
+├── 📄 LICENSE.txt
+├── 📄 package-lock.json
+├── 📄 package.json
+├── 📄 README.md
+├── 📦 src/
+    ├── 📄 index.ts
+    └── 📂 utils/
+        ├── 📄 analyzeCodebase.ts
+        ├── 📄 formatScripts.ts
+        ├── 📄 generateReadme.ts
+        ├── 📄 guessMainLanguage.ts
+        ├── 📄 languages.ts
+        └── 📄 tree.ts
+└── 📄 tsconfig.json
 ```
 
 ---
@@ -188,8 +211,11 @@ yarn prepublishOnly
 ## 💻 Language Usage
 
 ```
-TypeScript: ██ 20.01%
-JavaScript: ████████ 79.99%
+Markdown: ███ 27.96%
+JSON: ██ 20.00%
+TypeScript: █████ 50.56%
+Other:  1.48%
+
 ```
 
 ---
