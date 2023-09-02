@@ -134,7 +134,6 @@ const collectInfo = async (packageInfo: any): Promise<IAnswers> => {
     answers.licenseType
   );
 
-  // For languages and frameworks, since these are arrays, handling default values may need special treatment.
   answers.language.languages =
     (
       await prompt(

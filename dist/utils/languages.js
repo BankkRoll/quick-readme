@@ -1,7 +1,6 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.languageColors = exports.generateLanguageUsage = void 0;
-// Define the language colors mapping
 const languageColors = {
   JavaScript: 'F7DF1E',
   'JavaScript (React)': '61DAFB',
@@ -41,15 +40,12 @@ const languageColors = {
   npm: 'CB3837',
 };
 exports.languageColors = languageColors;
-// Function to generate a visual representation of language usage in a project
 const generateLanguageUsage = languageStats => {
   let total = 0;
   let otherTotal = 0;
-  // Calculate the total usage
   for (const lang in languageStats) {
     total += languageStats[lang];
   }
-  // Generate the visual representation
   let visualRepresentation = '';
   for (const lang in languageStats) {
     const percentage = ((languageStats[lang] / total) * 100).toFixed(2);

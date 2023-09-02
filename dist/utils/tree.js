@@ -8,7 +8,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 exports.generateTree = void 0;
 const fs_1 = __importDefault(require('fs'));
 const path_1 = __importDefault(require('path'));
-// List of directories and files to ignore
 const ignoreList = ['.git', '.next', 'node_modules', '.DS_Store', '.objects'];
 const generateTree = (dir, level = 0, treeString = '', parent = '') => {
   const padding = ' '.repeat(level * 4);

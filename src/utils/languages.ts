@@ -1,4 +1,3 @@
-// Define the language colors mapping
 const languageColors = {
   JavaScript: 'F7DF1E',
   'JavaScript (React)': '61DAFB',
@@ -38,18 +37,15 @@ const languageColors = {
   npm: 'CB3837',
 };
 
-// Function to generate a visual representation of language usage in a project
 export const generateLanguageUsage = (
   languageStats: Record<string, number>
 ) => {
   let total = 0;
   let otherTotal = 0;
-  // Calculate the total usage
   for (const lang in languageStats) {
     total += languageStats[lang];
   }
 
-  // Generate the visual representation
   let visualRepresentation = '';
   for (const lang in languageStats) {
     const percentage = ((languageStats[lang] / total) * 100).toFixed(2);

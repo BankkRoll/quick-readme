@@ -74,7 +74,6 @@ async function generateReadme(answers, packageInfo) {
         'License'
       );
     }
-    // Loop over languages
     languages.forEach(lang => {
       const color = languageColors[lang] || 'defaultColor';
       addBadge(
@@ -82,7 +81,6 @@ async function generateReadme(answers, packageInfo) {
         lang
       );
     });
-    // Loop over frameworks
     frameworks.forEach(fw => {
       addBadge(
         `https://img.shields.io/badge/framework-${fw}-green.svg?style`,
@@ -104,7 +102,6 @@ async function generateReadme(answers, packageInfo) {
         'GitHub Repo Size'
       );
     }
-    // Close the paragraph
     markdown += '</div>\n\n';
   }
   markdown += `</div>\n\n`;
@@ -135,13 +132,10 @@ async function generateReadme(answers, packageInfo) {
   addToTOC('Directory Tree', '-directory-tree');
   markdown += `## 🌳 Directory Tree\n\n\`\`\`graphql\n${(0,
   tree_1.generateTree)(process.cwd())}\`\`\`\n\n---\n\n`;
-  // Analyze the codebase to get language stats
-  const languageStats = (0, analyzeCodebase_1.analyzeCodebase)(process.cwd()); // <-- Add this line
-  // Generate the visual representation of language usage
-  const languageUsage = (0, languages_1.generateLanguageUsage)(languageStats); // <-- Add this line
-  // Add the Language Usage section to your markdown
-  addToTOC('Language Usage', '-language-usage'); // <-- Add this line
-  markdown += `## 💻 Language Usage\n\n\`\`\`\n${languageUsage}\n\`\`\`\n\n---\n\n`; // <-- Add this line
+  const languageStats = (0, analyzeCodebase_1.analyzeCodebase)(process.cwd());
+  const languageUsage = (0, languages_1.generateLanguageUsage)(languageStats);
+  addToTOC('Language Usage', '-language-usage');
+  markdown += `## 💻 Language Usage\n\n\`\`\`\n${languageUsage}\n\`\`\`\n\n---\n\n`;
   addToTOC('Contributing', '-contributing');
   markdown += `## 🤝 Contributing\n\n1. Fork the Project\n2. Create your Feature Branch\n3. Commit your Changes\n4. Push to the Branch\n5. Open a Pull Request\n6. Code review\n7. Merge the changes\n8. Update the documentation\n\n---\n\n`;
   addToTOC('License', '-license');
@@ -150,9 +144,7 @@ async function generateReadme(answers, packageInfo) {
   markdown += `## 👤 Author\n\n**[${answers.authorName}](https://github.com/${answers.authorGithub})**\n\n- Twitter: [@${answers.authorTwitter}](https://twitter.com/${answers.authorTwitter})\n- GitHub: [@${answers.authorGithub}](https://github.com/${answers.authorGithub})\n\n`;
   const toc = `## 🗂️ Table of Contents\n\n${tocEntries.join('\n')}\n\n---\n\n`;
   markdown = markdown.replace('<!--TOC-->', toc);
-  // Add styled footer
   markdown += `\n---\n\n<p align="center"><i><font color="grey">This README.md has been generated with ❤️ using <a href="https://github.com/BankkRoll/quick-readme">quick-readme</a></font></i></p>\n`;
-  // Write the README.md file
   fs_1.default.writeFileSync('README.md', markdown);
 }
 exports.generateReadme = generateReadme;

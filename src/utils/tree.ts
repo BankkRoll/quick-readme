@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 
-// List of directories and files to ignore
 const ignoreList: string[] = [
   '.git',
   '.next',

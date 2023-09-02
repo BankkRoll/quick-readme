@@ -113,7 +113,6 @@ const collectInfo = async packageInfo => {
     'Provide the type of license your project uses (MIT, Apache, etc.) (optional): ',
     answers.licenseType
   );
-  // For languages and frameworks, since these are arrays, handling default values may need special treatment.
   answers.language.languages =
     (
       await prompt(

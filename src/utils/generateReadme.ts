@@ -80,7 +80,6 @@ export async function generateReadme(answers: any, packageInfo: any) {
       );
     }
 
-    // Loop over languages
     languages.forEach(lang => {
       const color =
         (languageColors as Record<string, string>)[lang] || 'defaultColor';
@@ -90,7 +89,6 @@ export async function generateReadme(answers: any, packageInfo: any) {
       );
     });
 
-    // Loop over frameworks
     frameworks.forEach(fw => {
       addBadge(
         `https://img.shields.io/badge/framework-${fw}-green.svg?style`,
@@ -114,7 +112,6 @@ export async function generateReadme(answers: any, packageInfo: any) {
       );
     }
 
-    // Close the paragraph
     markdown += '</div>\n\n';
   }
 
@@ -153,15 +150,12 @@ export async function generateReadme(answers: any, packageInfo: any) {
     process.cwd()
   )}\`\`\`\n\n---\n\n`;
 
-  // Analyze the codebase to get language stats
-  const languageStats = analyzeCodebase(process.cwd()); // <-- Add this line
+  const languageStats = analyzeCodebase(process.cwd());
 
-  // Generate the visual representation of language usage
-  const languageUsage = generateLanguageUsage(languageStats); // <-- Add this line
+  const languageUsage = generateLanguageUsage(languageStats);
 
-  // Add the Language Usage section to your markdown
-  addToTOC('Language Usage', '-language-usage'); // <-- Add this line
-  markdown += `## 💻 Language Usage\n\n\`\`\`\n${languageUsage}\n\`\`\`\n\n---\n\n`; // <-- Add this line
+  addToTOC('Language Usage', '-language-usage');
+  markdown += `## 💻 Language Usage\n\n\`\`\`\n${languageUsage}\n\`\`\`\n\n---\n\n`;
 
   addToTOC('Contributing', '-contributing');
   markdown += `## 🤝 Contributing\n\n1. Fork the Project\n2. Create your Feature Branch\n3. Commit your Changes\n4. Push to the Branch\n5. Open a Pull Request\n6. Code review\n7. Merge the changes\n8. Update the documentation\n\n---\n\n`;
@@ -176,9 +170,7 @@ export async function generateReadme(answers: any, packageInfo: any) {
 
   markdown = markdown.replace('<!--TOC-->', toc);
 
-  // Add styled footer
   markdown += `\n---\n\n<p align="center"><i><font color="grey">This README.md has been generated with ❤️ using <a href="https://github.com/BankkRoll/quick-readme">quick-readme</a></font></i></p>\n`;
 
-  // Write the README.md file
   fs.writeFileSync('README.md', markdown);
 }
