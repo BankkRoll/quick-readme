@@ -9,7 +9,7 @@
 ---
 
 <div align="center">
-<img src="https://img.shields.io/npm/v/quick-readme.svg?style" alt="npm version" /> <img src="https://img.shields.io/badge/license-MIT-blue.svg?style" alt="License" /> <img src="https://img.shields.io/badge/JavaScript-JavaScript-F7DF1E?style&logo=JavaScript&logoColor=F7DF1E" alt="JavaScript" /> <img src="https://img.shields.io/badge/TypeScript-TypeScript-3178C6?style&logo=TypeScript&logoColor=3178C6" alt="TypeScript" /> <img src="https://img.shields.io/github/stars/BankkRoll/quick-readme.svg?style=social" alt="GitHub Stars" /> <img src="https://img.shields.io/github/last-commit/BankkRoll/quick-readme.svg?style" alt="GitHub Last Commit" /> <img src="https://img.shields.io/github/repo-size/BankkRoll/quick-readme.svg?style" alt="GitHub Repo Size" /> </div>
+<img src="https://img.shields.io/npm/v/quick-readme.svg?style" alt="npm version" /> <img src="https://img.shields.io/badge/license-MIT-blue.svg?style" alt="License" /> <img src="https://img.shields.io/badge/JavaScript-JavaScript-F7DF1E?style&logo=JavaScript&logoColor=F7DF1E" alt="JavaScript" /> <img src="https://img.shields.io/badge/TypeScript-TypeScript-3178C6?style&logo=TypeScript&logoColor=3178C6" alt="TypeScript" /> <img src="https://img.shields.io/github/stars/BankkRoll/quick-readme.svg?style=social" alt="GitHub Stars" /> <img src="https://img.shields.io/github/last-commit/BankkRoll/quick-readme.svg?style" alt="GitHub Last Commit" /> <img src="https://img.shields.io/github/repo-size/BankkRoll/quick-readme.svg?style" alt="GitHub Repo Size" /> <img src="https://img.shields.io/website-up-down-green-red/http/monip.org.svg" alt="Website Status" /> <img src="https://img.shields.io/npm/dt/quick-readme.svg" alt="npm Downloads" /> </div>
 
 </div>
 
@@ -20,6 +20,8 @@
 - [Features](#️-features)
 - [Installation](#-installation)
 - [Usage](#-usage)
+  - [Question Usage](#question-usage)
+  - [Config Usage](#config-usage)
 - [Scripts](#-scripts)
 - [Directory Tree](#-directory-tree)
 - [Language Usage](#-language-usage)
@@ -31,17 +33,18 @@
 
 ## ⚙️ Features
 
-| Feature                    | Description                            |
-| -------------------------- | -------------------------------------- |
-| **Easy Readme Generation** | Description for Easy Readme Generation |
-| **Fast & Simple**          | Description for Fast & Simple          |
-| **Fully Advanced Results** | Description for Fully Advanced Results |
+| Feature                    | Description                                                                                              |
+| -------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Easy Readme Generation** | Generate professional README files with a simple command. No need to worry about formatting or layout.   |
+| **Fast & Simple**          | Designed for ease of use. The intuitive interface guides you through the process in a matter of seconds. |
+| **Fully Advanced Results** | Offers advanced options for customizing your README, including adding badges, custom scripts, and more.  |
 
 ---
 
 ## 📦 Installation
 
-Global Installation
+### Global Installation
+
 To install the `quick-readme` package globally, open your terminal and run the following command:
 
 ```bash
@@ -50,7 +53,8 @@ npm install -g quick-readme
 
 This will install the package globally, allowing you to use the `quick-readme` command anywhere in your terminal.
 
-Local Installation
+### Local Installation
+
 To install the `quick-readme` package locally in your project, navigate to your project's directory and run:
 
 ```bash
@@ -61,19 +65,110 @@ This will install the package as a dev dependency in your project.
 
 ## 🚀 Usage
 
-After installing, you can generate a README by running:
+### Question Usage
 
-For Global Installation
+Run the `quick-readme` command and answer the questions prompted to generate your README:
 
 ```bash
 quick-readme
 ```
 
-For Local Installation
+### Config Usage
 
-```bash
-npx quick-readme
+You can also generate a README using a configuration file. Create a file named `quick-readme.json` in your project root and populate it with your project details. You can check out an example configuration file [/example.quick-readme.json](/example.quick-readme.json) or click the summary below to see the contents with details.
+
+<details>
+<summary>(Click to open!) Example quick-readme.json File</summary>
+
+```json
+{
+  // The title of your project
+  "title": "quick-readme",
+
+  // A brief description of your project
+  "description": "A CLI tool to generate README files super fast and easily!",
+
+  // The GitHub repository URL of your project
+  "repo": "https://github.com/BankkRoll/quick-readme",
+
+  // The website URL of your project (if available)
+  "websiteUrl": "",
+
+  // The URL for the banner image to display at the top of your README
+  "bannerUrl": "https://github.com/BankkRoll/quick-readme/assets/106103625/332aaeb9-0df8-439c-bd72-a1777b0e2019",
+
+  // Your name or your organization's name
+  "authorName": "BankkRoll",
+
+  // Your GitHub handle
+  "authorGithub": "BankkRoll",
+
+  // Your Twitter handle
+  "authorTwitter": "bankkroll_eth",
+
+  // Features of your project, separated by commas
+  "projectFeatures": "Easy Readme Generation, Fast & Simple, Fully Advanced Results",
+
+  // The npm package name (if your project is an npm package)
+  "npmPackage": "quick-readme",
+
+  // The build tool your project uses
+  "buildTool": "",
+
+  // The license your project is under
+  "licenseType": "MIT",
+
+  // Programming languages used in the project
+  "languages": ["JavaScript", "TypeScript"],
+
+  // Frameworks used in the project
+  "frameworks": [],
+
+  // Scripts you want to highlight in your README
+  "selectedScripts": [
+    "start",
+    "build",
+    "format",
+    "add-shebang",
+    "prepublishOnly"
+  ],
+
+  // Badges to display at the top of your README
+  "selectedBadges": [
+    "npm version",
+    "License",
+    "Languages",
+    "GitHub Stars",
+    "GitHub Last Commit",
+    "GitHub Repo Size"
+  ],
+
+  // Internal name of your project (usually the repo name)
+  "name": "quick-readme",
+
+  // Any custom scripts your project uses
+  "scripts": {
+    "start": "npm run start",
+    "build": "npm run build",
+    "format": "npm run format",
+    "add-shebang": "npm run add-shebang",
+    "prepublishOnly": "npm run prepublishOnly"
+  },
+
+  // Information about your project's repository
+  "repository": {
+    "url": "https://github.com/BankkRoll/quick-readme.git"
+  },
+
+  // License information
+  "license": "MIT",
+
+  // Author information
+  "author": "BankkRoll"
+}
 ```
+
+</details>
 
 ## 🛠️ Scripts
 
@@ -111,54 +206,6 @@ Or with yarn:
 yarn build
 ```
 
-#### format
-
-Formats the codebase.
-
-You can run this script using npm or yarn:
-
-```shell
-npm run format
-```
-
-Or with yarn:
-
-```shell
-yarn format
-```
-
-#### add-shebang
-
-Runs the custom script.
-
-You can run this script using npm or yarn:
-
-```shell
-npm run add-shebang
-```
-
-Or with yarn:
-
-```shell
-yarn add-shebang
-```
-
-#### prepublishOnly
-
-Runs the custom script.
-
-You can run this script using npm or yarn:
-
-```shell
-npm run prepublishOnly
-```
-
-Or with yarn:
-
-```shell
-yarn prepublishOnly
-```
-
 ---
 
 ## 🌳 Directory Tree
@@ -190,10 +237,10 @@ yarn prepublishOnly
         ├── 📄 tree.d.ts
         ├── 📄 tree.js
         └── 📄 tree.js.map
+├── 📄 example.quick-readme.json
 ├── 📄 LICENSE.txt
 ├── 📄 package-lock.json
 ├── 📄 package.json
-├── 📄 README.md
 ├── 📦 src/
     ├── 📄 index.ts
     └── 📂 utils/
@@ -211,10 +258,10 @@ yarn prepublishOnly
 ## 💻 Language Usage
 
 ```
-Markdown: ███ 27.96%
-JSON: ██ 20.00%
-TypeScript: █████ 50.56%
-Other:  1.48%
+JSON: ██ 22.64%
+Markdown: ██ 17.68%
+TypeScript: ██████ 58.24%
+Other:  1.43%
 ```
 
 ---

@@ -1,0 +1,44 @@
+{
+  "title": "quick-readme",
+  "description": "A CLI tool to generate README files super fast and easily!",
+  "repo": "https://github.com/BankkRoll/quick-readme",
+  "websiteUrl": "https://www.npmjs.com/package/quick-readme",
+  "bannerUrl": "https://github.com/BankkRoll/quick-readme/assets/106103625/332aaeb9-0df8-439c-bd72-a1777b0e2019",
+  "authorName": "BankkRoll",
+  "authorGithub": "BankkRoll",
+  "authorTwitter": "bankkroll_eth",
+  "projectFeatures": "Easy Readme Generation, Fast & Simple, Fully Advanced Results",
+  "npmPackage": "quick-readme",
+  "buildTool": "Travis",
+  "licenseType": "MIT",
+  "languages": ["JavaScript", "TypeScript"],
+  "frameworks": ["React", "Vue"],
+  "selectedScripts": [
+    "start",
+    "build",
+    "format",
+    "add-shebang",
+    "prepublishOnly"
+  ],
+  "selectedBadges": [
+    "npm version",
+    "License",
+    "Languages",
+    "GitHub Stars",
+    "GitHub Last Commit",
+    "GitHub Repo Size"
+  ],
+  "name": "quick-readme",
+  "scripts": {
+    "start": "npm run start",
+    "build": "npm run build",
+    "format": "npm run format",
+    "add-shebang": "npm run add-shebang",
+    "prepublishOnly": "npm run prepublishOnly"
+  },
+  "repository": {
+    "url": "https://github.com/BankkRoll/quick-readme.git"
+  },
+  "license": "MIT",
+  "author": "BankkRoll"
+}

@@ -1,7 +1,9 @@
+// src/index.ts
 import { promises as fs } from 'fs';
-import readline from 'readline';
+import { prompt } from 'enquirer';
 import { guessMainLanguage } from './utils/guessMainLanguage';
 import { generateReadme } from './utils/generateReadme';
+import path from 'path';
 
 interface IAnswers {
   title: string;
@@ -19,38 +21,26 @@ interface IAnswers {
     languages: string[];
     frameworks: string[];
   };
+  websiteUrl: string;
+  selectedBadges: string[];
 }
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: true,
-});
+interface PackageInfo {
+  name?: string;
+  description?: string;
+  scripts?: { [key: string]: string };
+  repository?: { url: string };
+  license?: string;
+  author?: string;
+}
 
-const prompt = async (
-  question: string,
-  color: string = '\x1b[34m'
-): Promise<string> => {
-  // Default color is blue
-  return new Promise(resolve => {
-    rl.question(color + question + '\x1b[0m', answer => {
-      resolve(answer);
-    });
-  });
-};
-
-const promptWithDefault = async (
-  question: string,
-  defaultValue: string,
-  color: string = '\x1b[34m'
-): Promise<string> => {
-  return new Promise(resolve => {
-    process.stdout.write(color + question + '\x1b[0m');
-    process.stdout.write(defaultValue);
-    rl.once('line', userInput => {
-      resolve(userInput === '' ? defaultValue : userInput);
-    });
-  });
+const readConfigFile = async (): Promise<IAnswers | null> => {
+  try {
+    const file = await fs.readFile('quick-readme.json', 'utf-8');
+    return JSON.parse(file);
+  } catch (error) {
+    return null;
+  }
 };
 
 const readPackageJson = async () => {
@@ -59,143 +49,289 @@ const readPackageJson = async () => {
     const packageJson = JSON.parse(file);
     return packageJson;
   } catch (error) {
-    console.error('\x1b[31m', 'Could not read package.json:', error, '\x1b[0m'); // Red for error
+    console.error('Could not read package.json:', error);
     return null;
   }
 };
 
-const guessBuildTool = (packageInfo: any): string => {
-  if (packageInfo.scripts['build']?.includes('travis')) return 'Travis';
-  if (packageInfo.scripts['build']?.includes('jenkins')) return 'Jenkins';
+const guessBuildTool = (packageInfo: PackageInfo): string => {
+  const buildScript = packageInfo.scripts?.['build'];
+  if (!buildScript) return '';
+
+  const buildTools = [
+    'webpack',
+    'parcel',
+    'gulp',
+    'vite',
+    'esbuild',
+    'rollup',
+    'rome',
+    'snowpack',
+    'travis',
+    'jenkins',
+    'github-actions',
+    'gitlab',
+    'circleci',
+    'teamcity',
+    'appveyor',
+    'bamboo',
+  ];
+
+  for (const tool of buildTools) {
+    if (buildScript.toLowerCase().includes(tool)) return tool;
+  }
+
   return '';
 };
 
-const collectInfo = async (packageInfo: any): Promise<IAnswers> => {
-  const answers: IAnswers = {
-    title: packageInfo?.name || '',
-    description: packageInfo?.description || '',
-    bannerUrl: '',
-    authorName: packageInfo?.authorName || packageInfo?.author || '',
-    authorGithub: packageInfo?.authorGithub || '',
-    authorTwitter: packageInfo?.authorTwitter || '',
-    repo: '',
-    projectFeatures: '',
-    npmPackage: '',
-    buildTool: guessBuildTool(packageInfo) || '',
-    licenseType: packageInfo?.license || '',
-    language: guessMainLanguage(packageInfo) || {
-      languages: [],
-      frameworks: [],
+const collectInfo = async (packageInfo: PackageInfo): Promise<IAnswers> => {
+  const { languages, frameworks } = guessMainLanguage(packageInfo);
+  const initialBadges: string[] = [];
+  const instructions =
+    '\x1b[36mUse the arrow keys to navigate: ↓ ↑ → ←. Press Spacebar to select an item. Press "a" to select/deselect all. Press Enter to confirm your choices.\x1b[0m';
+
+  const questions = [
+    {
+      type: 'input',
+      name: 'title',
+      message: 'Provide the title of your project (optional):',
+      default: packageInfo?.name || '',
     },
-  };
+    {
+      type: 'input',
+      name: 'description',
+      message: 'Provide a description of your project (optional):',
+      default: packageInfo?.description || '',
+    },
+    {
+      type: 'input',
+      name: 'repo',
+      message: 'Provide the GitHub repository URL for your project (optional):',
+      default: packageInfo?.repository?.url?.replace(/\.git$/, '') || '',
+    },
+    {
+      type: 'input',
+      name: 'websiteUrl',
+      message: 'Provide the website URL for your project (optional):',
+      default: '',
+    },
+    {
+      type: 'input',
+      name: 'bannerUrl',
+      message: 'Provide the URL for the title banner (optional):',
+      default: '',
+    },
+    {
+      type: 'input',
+      name: 'authorName',
+      message: "Provide author's name (optional):",
+      default:
+        packageInfo?.repository?.url?.split('/').slice(-2, -1)[0] ||
+        packageInfo?.author ||
+        '',
+    },
+    {
+      type: 'input',
+      name: 'authorGithub',
+      message: "Provide author's GitHub handle (optional):",
+      default:
+        packageInfo?.repository?.url?.split('/').slice(-2, -1)[0] ||
+        packageInfo?.author ||
+        '',
+    },
+    {
+      type: 'input',
+      name: 'authorTwitter',
+      message: "Provide author's Twitter handle (optional):",
+      default: '',
+    },
+    {
+      type: 'input',
+      name: 'projectFeatures',
+      message:
+        'Provide a list of the project features separated by commas (optional):',
+      default: '',
+    },
+    {
+      type: 'input',
+      name: 'npmPackage',
+      message: 'Provide the NPM package name (optional):',
+      default: '',
+    },
+    {
+      type: 'input',
+      name: 'buildTool',
+      message:
+        'Provide the build tool you are using (e.g., Travis, Jenkins, optional):',
+      default: guessBuildTool(packageInfo) || '',
+    },
+    {
+      type: 'input',
+      name: 'licenseType',
+      message:
+        'Provide the type of license your project uses (e.g., MIT, Apache, optional):',
+      default: packageInfo?.license || '',
+    },
+    {
+      type: 'multiselect',
+      name: 'languages',
+      message: `${instructions}\nSelect the main programming languages used (optional):`,
+      choices: [
+        'JavaScript',
+        'TypeScript',
+        'CoffeeScript',
+        'Elm',
+        'PureScript',
+        'ClojureScript',
+        'Dart',
+        'Other',
+      ],
+      initial: languages,
+      multiple: true,
+    },
+    {
+      type: 'multiselect',
+      name: 'frameworks',
+      message: `Select the main frameworks used (optional):`,
+      choices: [
+        'ReactJS',
+        'Angular',
+        'VueJS',
+        'NestJS',
+        'ExpressJS',
+        'Next.js',
+        'Svelte',
+        'Ember.js',
+        'Other',
+      ],
+      initial: frameworks,
+      multiple: true,
+    },
+    {
+      type: 'multiselect',
+      name: 'selectedScripts',
+      message: 'Select the scripts to display (leave blank for none):',
+      choices: Object.keys(packageInfo.scripts || {}),
+      multiple: true,
+    },
+  ];
 
-  answers.title = await promptWithDefault(
-    'What is the title of your project? (optional) ',
-    answers.title
-  );
-  answers.description = await promptWithDefault(
-    'Provide a description of your project: (optional) ',
-    answers.description
-  );
-  answers.authorName = await promptWithDefault(
-    "What is the author's name? (optional): ",
-    answers.authorName
-  );
-  answers.authorGithub = await promptWithDefault(
-    "What is the author's GitHub handle? (optional): ",
-    answers.authorGithub
-  );
-  answers.authorTwitter = await promptWithDefault(
-    "What is the author's Twitter handle? (optional): ",
-    answers.authorTwitter
-  );
-  answers.bannerUrl = await promptWithDefault(
-    'Provide the URL for the title banner (optional): ',
-    answers.bannerUrl
-  );
-  answers.repo = await promptWithDefault(
-    'Provide your GitHub repository URL (optional): ',
-    answers.repo
-  );
-  answers.projectFeatures = await promptWithDefault(
-    'List your project features separated by commas (optional): ',
-    answers.projectFeatures
-  );
-  answers.npmPackage = await promptWithDefault(
-    'Provide your NPM package name if any (optional): ',
-    answers.npmPackage
-  );
-  answers.buildTool = await promptWithDefault(
-    'Provide the build tool you are using if any (Travis, Jenkins, etc.) (optional): ',
-    answers.buildTool
-  );
-  answers.licenseType = await promptWithDefault(
-    'Provide the type of license your project uses (MIT, Apache, etc.) (optional): ',
-    answers.licenseType
-  );
+  const answers: Partial<IAnswers> = await prompt(questions);
 
-  answers.language.languages =
-    (
-      await prompt(
-        'What are the main programming languages used? (JavaScript, Python, etc.) (optional): '
-      )
-    ).split(',') || answers.language.languages;
-  answers.language.frameworks =
-    (
-      await prompt(
-        'What are the main frameworks used? (React, Angular, etc.) (optional): '
-      )
-    ).split(',') || answers.language.frameworks;
+  if (answers.buildTool) {
+    initialBadges.push('Build Tool');
+  }
+  if (answers.npmPackage) {
+    initialBadges.push('npm version', 'npm Downloads');
+  }
+  if (answers.licenseType) {
+    initialBadges.push('License');
+  }
+  if (answers.language?.languages?.length ?? 0 > 0) {
+    initialBadges.push('Languages');
+  }
+  if (answers.language?.frameworks?.length ?? 0 > 0) {
+    initialBadges.push('Frameworks');
+  }
+  if (answers.repo) {
+    initialBadges.push(
+      'GitHub Stars',
+      'GitHub Last Commit',
+      'GitHub Repo Size'
+    );
+  }
+  if (answers.websiteUrl) {
+    initialBadges.push('Website Status');
+  }
 
-  return answers;
+  const badgeAnswers = await prompt({
+    type: 'multiselect',
+    name: 'selectedBadges',
+    message:
+      'Select the badges for your README. Pre-selected badges are based on project info, Others may require manual editing.',
+    choices: [
+      'Build Tool',
+      'npm version',
+      'License',
+      'Languages',
+      'Frameworks',
+      'GitHub Stars',
+      'GitHub Last Commit',
+      'GitHub Repo Size',
+      'Website Status',
+      'npm Downloads',
+    ] as any,
+    initial: initialBadges,
+    multiple: true,
+  } as any);
+
+  return { ...answers, ...badgeAnswers } as IAnswers;
 };
 
 const main = async () => {
   try {
-    const shouldProceed = await prompt(
-      'This will overwrite your existing README.md. Do you want to proceed? (yes/no): ',
-      '\x1b[33m'
-    );
+    const configFile = await readConfigFile();
+    let answers;
 
-    if (!shouldProceed) {
-      throw new Error('Failed to get user confirmation.');
+    let proceedMessage =
+      '\x1b[33mThis will overwrite your existing README.md. Do you want to proceed? (yes/no):\x1b[0m';
+    if (configFile) {
+      console.log('\x1b[32mFound quick-readme.json file.\x1b[0m');
+      proceedMessage =
+        '\x1b[33mMake sure your config is correct. This will overwrite your existing README.md. Do you want to proceed? (yes/no):\x1b[0m';
     }
 
-    if (shouldProceed.toLowerCase() !== 'yes') {
-      console.log('\x1b[33m', 'Operation aborted.', '\x1b[0m');
-      rl.close();
+    const shouldProceed: { proceed: string } = await prompt({
+      type: 'input',
+      name: 'proceed',
+      message: proceedMessage,
+    });
+
+    if (shouldProceed.proceed.toLowerCase() !== 'yes') {
+      console.log('\x1b[31mOperation aborted.\x1b[0m');
       return;
     }
 
-    console.log('\x1b[32m', 'Proceeding with README generation...', '\x1b[0m');
+    if (configFile) {
+      console.log('\x1b[32mSkipping questions and generating README...\x1b[0m');
+      answers = configFile;
+    } else {
+      console.log('\x1b[32mProceeding with README generation...\x1b[0m');
+      const packageInfo = await readPackageJson();
+      if (!packageInfo) {
+        throw new Error('Failed to read package.json or it does not exist.');
+      }
+      answers = await collectInfo(packageInfo);
+      if (!answers) {
+        throw new Error('Failed to collect information for README generation.');
+      }
+    }
 
     const packageInfo = await readPackageJson();
     if (!packageInfo) {
       throw new Error('Failed to read package.json or it does not exist.');
     }
 
-    const answers = await collectInfo(packageInfo);
-    if (!answers) {
-      throw new Error('Failed to collect information for README generation.');
-    }
+    await generateReadme(answers, packageInfo);
 
-    try {
-      await generateReadme(answers, packageInfo);
-    } catch (genError) {
-      throw new Error(
-        'Failed to generate README: ' + (genError as Error).message
-      );
-    }
-
-    console.log('\x1b[32m', 'README generation successful.', '\x1b[0m');
+    console.log('\x1b[32m✔ README.md generation successful.\x1b[0m');
+    console.log(
+      '\x1b[33m⚠ Please review and preview the generated README to ensure everything looks correct.\x1b[0m'
+    );
+    console.log('──────────────────────────────────────────────────');
+    console.log('Thank you for using quick-readme!');
+    console.log(' ');
+    console.log(
+      'If you found this tool helpful, please consider giving it a star ⭐'
+    );
+    console.log('\x1b[34m👉 https://github.com/BankkRoll/quick-readme\x1b[0m');
+    console.log(' ');
+    console.log('Have a feature request or found a bug? 🐛');
+    console.log('Please leave an issue on the GitHub repository.');
+    console.log('We appreciate your contribution! 💖');
+    console.log('──────────────────────────────────────────────────');
   } catch (error) {
-    if (error instanceof Error) {
-      console.error('\x1b[31m', 'An error occurred:', error.message, '\x1b[0m');
-    } else {
-      console.error('\x1b[31m', 'An unknown error occurred:', error, '\x1b[0m');
-    }
-  } finally {
-    rl.close();
+    console.error('\x1b[31mAn error occurred:\x1b[0m', error);
   }
 };
 

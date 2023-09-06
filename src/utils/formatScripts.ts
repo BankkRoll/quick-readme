@@ -1,3 +1,4 @@
+// src/utils/formatScripts.ts
 export const formatScripts = (scripts: { [key: string]: string }) => {
   let markdown = 'Here are some common scripts you can run:\n\n';
   for (const [key, value] of Object.entries(scripts)) {

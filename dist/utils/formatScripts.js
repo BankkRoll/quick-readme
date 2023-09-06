@@ -1,6 +1,7 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.formatScripts = void 0;
+// src/utils/formatScripts.ts
 const formatScripts = scripts => {
   let markdown = 'Here are some common scripts you can run:\n\n';
   for (const [key, value] of Object.entries(scripts)) {

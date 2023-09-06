@@ -1,3 +1,4 @@
+// src/utils/guessMainLanguage.ts
 export const guessMainLanguage = (packageInfo: any) => {
   let languages: string[] = [];
   let frameworks: string[] = [];

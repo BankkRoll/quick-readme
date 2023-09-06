@@ -1,3 +1,4 @@
+// src/utils/generateReadme.ts
 import fs from 'fs';
 import { guessMainLanguage } from './guessMainLanguage';
 import { formatScripts } from './formatScripts';
@@ -8,6 +9,7 @@ import { generateLanguageUsage } from './languages';
 export async function generateReadme(answers: any, packageInfo: any) {
   let markdown = '';
   let tocEntries: string[] = [];
+
   const { languages, frameworks } = guessMainLanguage(packageInfo);
 
   const languageColors = {
@@ -39,14 +41,7 @@ export async function generateReadme(answers: any, packageInfo: any) {
   }</h3>\n</div>\n\n`;
   markdown += `---\n\n`;
 
-  if (
-    answers.repo ||
-    answers.npmPackage ||
-    answers.buildTool ||
-    answers.licenseType ||
-    languages.length > 0 ||
-    frameworks.length > 0
-  ) {
+  if (answers.selectedBadges && answers.selectedBadges.length > 0) {
     markdown += `<div align="center">\n`;
 
     const repoName = answers.repo ? answers.repo.split('github.com/')[1] : '';
@@ -62,55 +57,81 @@ export async function generateReadme(answers: any, packageInfo: any) {
       markdown += `<img src="${src}${logoPart}${logoColorPart}" alt="${alt}" /> `;
     };
 
-    if (answers.buildTool === 'Travis') {
-      addBadge(`https://img.shields.io/travis/${repoName}.svg?style`, 'Travis');
-    }
-
-    if (answers.npmPackage) {
-      addBadge(
-        `https://img.shields.io/npm/v/${answers.npmPackage}.svg?style`,
-        'npm version'
-      );
-    }
-
-    if (answers.licenseType) {
-      addBadge(
-        `https://img.shields.io/badge/license-${answers.licenseType}-blue.svg?style`,
-        'License'
-      );
-    }
-
-    languages.forEach(lang => {
-      const color =
-        (languageColors as Record<string, string>)[lang] || 'defaultColor';
-      addBadge(
-        `https://img.shields.io/badge/${lang}-${lang}-${color}?style&logo=${lang}&logoColor=${color}`,
-        lang
-      );
+    // Loop through the selected badges and add them
+    answers.selectedBadges.forEach((badge: string) => {
+      switch (badge) {
+        case 'Build Tool':
+          addBadge(
+            `https://img.shields.io/${answers.buildTool.toLowerCase()}/${repoName}.svg?style`,
+            answers.buildTool
+          );
+          break;
+        case 'npm version':
+          addBadge(
+            `https://img.shields.io/npm/v/${answers.npmPackage}.svg?style`,
+            'npm version'
+          );
+          break;
+        case 'License':
+          addBadge(
+            `https://img.shields.io/badge/license-${answers.licenseType}-blue.svg?style`,
+            'License'
+          );
+          break;
+        case 'Languages':
+          languages.forEach(lang => {
+            const color =
+              (languageColors as Record<string, string>)[lang] ||
+              'defaultColor';
+            addBadge(
+              `https://img.shields.io/badge/${lang}-${lang}-${color}?style&logo=${lang}&logoColor=${color}`,
+              lang
+            );
+          });
+          break;
+        case 'Frameworks':
+          frameworks.forEach(fw => {
+            addBadge(
+              `https://img.shields.io/badge/framework-${fw}-green.svg?style`,
+              fw,
+              fw
+            );
+          });
+          break;
+        case 'GitHub Stars':
+          addBadge(
+            `https://img.shields.io/github/stars/${repoName}.svg?style=social`,
+            'GitHub Stars'
+          );
+          break;
+        case 'GitHub Last Commit':
+          addBadge(
+            `https://img.shields.io/github/last-commit/${repoName}.svg?style`,
+            'GitHub Last Commit'
+          );
+          break;
+        case 'GitHub Repo Size':
+          addBadge(
+            `https://img.shields.io/github/repo-size/${repoName}.svg?style`,
+            'GitHub Repo Size'
+          );
+          break;
+        case 'Website Status':
+          addBadge(
+            `https://img.shields.io/website-up-down-green-red/http/monip.org.svg`,
+            'Website Status'
+          );
+          break;
+        case 'npm Downloads':
+          addBadge(
+            `https://img.shields.io/npm/dt/${answers.npmPackage}.svg`,
+            'npm Downloads'
+          );
+          break;
+        default:
+          break;
+      }
     });
-
-    frameworks.forEach(fw => {
-      addBadge(
-        `https://img.shields.io/badge/framework-${fw}-green.svg?style`,
-        fw,
-        fw
-      );
-    });
-
-    if (answers.repo) {
-      addBadge(
-        `https://img.shields.io/github/stars/${repoName}.svg?style=social`,
-        'GitHub Stars'
-      );
-      addBadge(
-        `https://img.shields.io/github/last-commit/${repoName}.svg?style`,
-        'GitHub Last Commit'
-      );
-      addBadge(
-        `https://img.shields.io/github/repo-size/${repoName}.svg?style`,
-        'GitHub Repo Size'
-      );
-    }
 
     markdown += '</div>\n\n';
   }
@@ -137,8 +158,21 @@ export async function generateReadme(answers: any, packageInfo: any) {
   addToTOC('Usage', '-usage');
   markdown += `## 🚀 Usage\n\nHere are some example usages.\n\n`;
 
-  if (packageInfo?.scripts) {
-    const scriptsMarkdown = formatScripts(packageInfo.scripts);
+  if (
+    answers.selectedScripts &&
+    answers.selectedScripts.length > 0 &&
+    packageInfo?.scripts
+  ) {
+    const selectedScripts = answers.selectedScripts.reduce(
+      (acc: { [key: string]: string }, key: string) => {
+        if (packageInfo.scripts![key]) {
+          acc[key] = packageInfo.scripts![key];
+        }
+        return acc;
+      },
+      {}
+    );
+    const scriptsMarkdown = formatScripts(selectedScripts);
     markdown += `## 🛠️ Scripts\n\n${scriptsMarkdown}\n\n`;
     addToTOC('Scripts', '-scripts');
   }

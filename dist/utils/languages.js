@@ -1,6 +1,7 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.languageColors = exports.generateLanguageUsage = void 0;
+// src/utils/languages.ts
 const languageColors = {
   JavaScript: 'F7DF1E',
   'JavaScript (React)': '61DAFB',

@@ -1,3 +1,4 @@
+// src/utils/languages.ts
 const languageColors = {
   JavaScript: 'F7DF1E',
   'JavaScript (React)': '61DAFB',

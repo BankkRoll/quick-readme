@@ -1,6 +1,6 @@
 {
   "name": "quick-readme",
-  "version": "1.0.3",
+  "version": "1.1.11",
   "description": "A CLI tool to generate README files super fast and easily!",
   "main": "dist/index.js",
   "scripts": {
@@ -34,9 +34,11 @@
     "url": "https://github.com/BankkRoll/quick-readme/issues"
   },
   "devDependencies": {
-    "@types/inquirer": "^9.0.3",
     "prettier": "3.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "enquirer": "^2.4.1"
   }
 }
