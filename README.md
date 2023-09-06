@@ -214,6 +214,7 @@ yarn build
 ├── 📄 .npmignore
 ├── 📄 .prettierrc
 ├── 📄 add-shebang.js
+├── 📄 README.md
 ├── 📦 dist/
     ├── 📄 index.d.ts
     ├── 📄 index.js
@@ -258,9 +259,9 @@ yarn build
 ## 💻 Language Usage
 
 ```
-JSON: ██ 22.64%
-Markdown: ██ 17.68%
-TypeScript: ██████ 58.24%
+TypeScript: ██████ 58.41%
+JSON: ██ 22.52%
+Markdown: ██ 17.65%
 Other:  1.43%
 ```
 

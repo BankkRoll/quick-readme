@@ -47,24 +47,29 @@ const generateLanguageUsage = languageStats => {
   for (const lang in languageStats) {
     total += languageStats[lang];
   }
-  let visualRepresentation = '';
+  // Create an array to store languages and their percentages
+  const languagePercentages = [];
   for (const lang in languageStats) {
-    const percentage = ((languageStats[lang] / total) * 100).toFixed(2);
-    if (parseFloat(percentage) < 10) {
+    const percentage = (languageStats[lang] / total) * 100;
+    if (percentage < 10) {
       otherTotal += languageStats[lang];
       continue;
     }
-    const bars = '█'.repeat(Math.round(parseFloat(percentage) / 10));
-    visualRepresentation += `${lang}: ${bars} ${percentage}%\n`;
+    languagePercentages.push({ lang, percentage });
+  }
+  // Sort the array by percentage in descending order
+  languagePercentages.sort((a, b) => b.percentage - a.percentage);
+  let visualRepresentation = '';
+  for (const { lang, percentage } of languagePercentages) {
+    const bars = '█'.repeat(Math.round(percentage / 10));
+    visualRepresentation += `${lang}: ${bars} ${percentage.toFixed(2)}%\n`;
   }
   if (otherTotal > 0) {
-    const otherPercentage = ((otherTotal / total) * 100).toFixed(2);
-    if (parseFloat(otherPercentage) > 0) {
-      const otherBars = '█'.repeat(
-        Math.round(parseFloat(otherPercentage) / 10)
-      );
-      visualRepresentation += `Other: ${otherBars} ${otherPercentage}%`;
-    }
+    const otherPercentage = (otherTotal / total) * 100;
+    const otherBars = '█'.repeat(Math.round(otherPercentage / 10));
+    visualRepresentation += `Other: ${otherBars} ${otherPercentage.toFixed(
+      2
+    )}%`;
   } else {
     visualRepresentation = visualRepresentation.slice(0, -1);
   }
