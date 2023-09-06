@@ -1,5 +1,9 @@
 // src/utils/guessMainLanguage.ts
-export const guessMainLanguage = (packageInfo: any) => {
+import { PackageInfo, GuessedLanguagesAndFrameworks } from '../../types';
+
+export const guessMainLanguage = (
+  packageInfo: PackageInfo
+): GuessedLanguagesAndFrameworks => {
   let languages: string[] = [];
   let frameworks: string[] = [];
 

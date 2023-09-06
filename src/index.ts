@@ -3,35 +3,7 @@ import { promises as fs } from 'fs';
 import { prompt } from 'enquirer';
 import { guessMainLanguage } from './utils/guessMainLanguage';
 import { generateReadme } from './utils/generateReadme';
-
-interface IAnswers {
-  title: string;
-  authorName: string;
-  authorGithub: string;
-  authorTwitter: string;
-  description: string;
-  bannerUrl: string;
-  repo: string;
-  projectFeatures: string;
-  npmPackage: string;
-  buildTool: string;
-  licenseType: string;
-  language: {
-    languages: string[];
-    frameworks: string[];
-  };
-  websiteUrl: string;
-  selectedBadges: string[];
-}
-
-interface PackageInfo {
-  name?: string;
-  description?: string;
-  scripts?: { [key: string]: string };
-  repository?: { url: string };
-  license?: string;
-  author?: string;
-}
+import { IAnswers, PackageInfo } from '../types';
 
 const readConfigFile = async (): Promise<IAnswers | null> => {
   try {

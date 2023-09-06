@@ -17,6 +17,6 @@
     "sourceMap": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/utils/analyzeCodebase.ts"],
+  "include": ["src/**/*.ts", "src/*.ts", "types.d.ts"],
   "exclude": ["node_modules"]
 }

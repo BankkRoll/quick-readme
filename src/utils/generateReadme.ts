@@ -5,10 +5,21 @@ import { formatScripts } from './formatScripts';
 import { generateTree } from './tree';
 import { analyzeCodebase } from './analyzeCodebase';
 import { generateLanguageUsage } from './languages';
+import {
+  IAnswers,
+  PackageInfo,
+  TOCEntry,
+  BadgeInfo,
+  LanguageColors,
+  SelectedScripts,
+} from '../../types';
 
-export async function generateReadme(answers: any, packageInfo: any) {
+export async function generateReadme(
+  answers: IAnswers,
+  packageInfo: PackageInfo
+) {
   let markdown = '';
-  let tocEntries: string[] = [];
+  let tocEntries: TOCEntry[] = [];
 
   const { languages, frameworks } = guessMainLanguage(packageInfo);
 

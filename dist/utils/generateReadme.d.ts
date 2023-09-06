@@ -1,4 +1,5 @@
+import { IAnswers, PackageInfo } from '../../types';
 export declare function generateReadme(
-  answers: any,
-  packageInfo: any
+  answers: IAnswers,
+  packageInfo: PackageInfo
 ): Promise<void>;

@@ -214,7 +214,6 @@ yarn build
 ├── 📄 .npmignore
 ├── 📄 .prettierrc
 ├── 📄 add-shebang.js
-├── 📄 README.md
 ├── 📦 dist/
     ├── 📄 index.d.ts
     ├── 📄 index.js
@@ -251,7 +250,9 @@ yarn build
         ├── 📄 guessMainLanguage.ts
         ├── 📄 languages.ts
         └── 📄 tree.ts
-└── 📄 tsconfig.json
+├── 📄 README.md
+├── 📄 tsconfig.json
+└── 📄 types.d.ts
 ```
 
 ---

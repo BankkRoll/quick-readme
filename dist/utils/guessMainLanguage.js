@@ -1,7 +1,6 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.guessMainLanguage = void 0;
-// src/utils/guessMainLanguage.ts
 const guessMainLanguage = packageInfo => {
   let languages = [];
   let frameworks = [];
