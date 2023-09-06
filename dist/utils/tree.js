@@ -6,6 +6,7 @@ var __importDefault =
   };
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.generateTree = void 0;
+// src/utils/tree.ts
 const fs_1 = __importDefault(require('fs'));
 const path_1 = __importDefault(require('path'));
 const ignoreList = ['.git', '.next', 'node_modules', '.DS_Store', '.objects'];

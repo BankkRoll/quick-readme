@@ -1,3 +1,4 @@
+// src/utils/analyzeCodebase.ts
 import fs from 'fs';
 import path from 'path';
 

@@ -3,7 +3,6 @@ import { promises as fs } from 'fs';
 import { prompt } from 'enquirer';
 import { guessMainLanguage } from './utils/guessMainLanguage';
 import { generateReadme } from './utils/generateReadme';
-import path from 'path';
 
 interface IAnswers {
   title: string;

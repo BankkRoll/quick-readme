@@ -53,7 +53,6 @@ async function generateReadme(answers, packageInfo) {
       const logoColorPart = logoColor ? `&logoColor=${logoColor}` : '';
       markdown += `<img src="${src}${logoPart}${logoColorPart}" alt="${alt}" /> `;
     };
-    // Loop through the selected badges and add them
     answers.selectedBadges.forEach(badge => {
       switch (badge) {
         case 'Build Tool':

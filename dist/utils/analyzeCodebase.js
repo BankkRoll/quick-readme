@@ -6,6 +6,7 @@ var __importDefault =
   };
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.analyzeCodebase = void 0;
+// src/utils/analyzeCodebase.ts
 const fs_1 = __importDefault(require('fs'));
 const path_1 = __importDefault(require('path'));
 const analyzeCodebase = startPath => {

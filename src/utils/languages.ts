@@ -48,7 +48,6 @@ export const generateLanguageUsage = (
     total += languageStats[lang];
   }
 
-  // Create an array to store languages and their percentages
   const languagePercentages: { lang: string; percentage: number }[] = [];
 
   for (const lang in languageStats) {
@@ -60,7 +59,6 @@ export const generateLanguageUsage = (
     languagePercentages.push({ lang, percentage });
   }
 
-  // Sort the array by percentage in descending order
   languagePercentages.sort((a, b) => b.percentage - a.percentage);
 
   let visualRepresentation = '';

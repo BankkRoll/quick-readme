@@ -57,7 +57,6 @@ export async function generateReadme(answers: any, packageInfo: any) {
       markdown += `<img src="${src}${logoPart}${logoColorPart}" alt="${alt}" /> `;
     };
 
-    // Loop through the selected badges and add them
     answers.selectedBadges.forEach((badge: string) => {
       switch (badge) {
         case 'Build Tool':
